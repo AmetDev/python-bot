@@ -4,20 +4,24 @@
         "nameparkovka": "seam",
         "password": "",
         "priceparkovka": 0,
+        "kolichesto-mest": 0,
+        "number of free parking spaces": 0,
         "free_forinvalid": false
     },
     {
-        "id": 34,
-        "nameparkovka": "34",
-        "password": "152005",
-        "priceparkovka": 12400,
-        "free_forinvalid": true
+        "id": 1,
+        "nameparkovka": "AMET",
+        "password": "1523",
+        "priceparkovka": 1200,
+        "free_forinvalid": true,
+        "number of free parking spaces": 231
     },
     {
-        "id": 34,
-        "nameparkovka": "34",
-        "password": "152005",
-        "priceparkovka": 12400,
-        "free_forinvalid": true
+        "id": 2,
+        "nameparkovka": "qwerty",
+        "password": "qwerty12",
+        "priceparkovka": 1200,
+        "free_forinvalid": true,
+        "number of free parking spaces": 1267565
     }
 ]
