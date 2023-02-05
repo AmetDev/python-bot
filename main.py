@@ -42,7 +42,9 @@ with open('test.json', 'r') as f:
         print(elements.get('id'))
         elements['id'] = user
         newelement = elements
-    templates.append(newelement)
+        templates.append(newelement)
+    elif (elements['id'] == user):
+        print("Такой элемент уже существует")
     with open('test.json', 'w') as d1:
         json.dump(templates, d1, indent = 4)
 #
