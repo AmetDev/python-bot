@@ -37,14 +37,14 @@ with open('test.json', 'r') as f:
     user = int(input())
     newelement = None
     for elements in templates:
-        print(elements)
-    if (elements.get('id') != user):
-        print(elements.get('id'))
-        elements['id'] = user
-        newelement = elements
-        templates.append(newelement)
-    elif (elements['id'] == user):
-        print("Такой элемент уже существует")
+        if(elements.get('id') != user):
+            elements2=  elements 
+        elif(elements.get('id') == user):
+            del elements
+    elements2['id'] = user
+    elements2['nameparkovka'] = input()
+    templates.append(elements2)
+
     with open('test.json', 'w') as d1:
         json.dump(templates, d1, indent = 4)
 #

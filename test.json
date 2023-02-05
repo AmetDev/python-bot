@@ -1,51 +1,23 @@
 [
     {
-        "id": 5454,
-        "nameparkovka": "",
+        "id": 0,
+        "nameparkovka": "seam",
         "password": "",
         "priceparkovka": 0,
         "free_forinvalid": false
     },
     {
-        "id": 556,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
+        "id": 34,
+        "nameparkovka": "34",
+        "password": "152005",
+        "priceparkovka": 12400,
+        "free_forinvalid": true
     },
     {
-        "id": 5667,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 12,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 354,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 12,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 12,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
+        "id": 34,
+        "nameparkovka": "34",
+        "password": "152005",
+        "priceparkovka": 12400,
+        "free_forinvalid": true
     }
 ]
