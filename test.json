@@ -1,34 +1,20 @@
 [
     {
-        "id": 23,
+        "id": 123456,
         "nameparkovka": "",
         "password": "",
         "priceparkovka": 0,
         "free_forinvalid": false
     },
     {
-        "id": 1,
+        "id": 123456,
         "nameparkovka": "",
         "password": "",
         "priceparkovka": 0,
         "free_forinvalid": false
     },
     {
-        "id": 2345,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 908,
-        "nameparkovka": "",
-        "password": "",
-        "priceparkovka": 0,
-        "free_forinvalid": false
-    },
-    {
-        "id": 908,
+        "id": 123456,
         "nameparkovka": "",
         "password": "",
         "priceparkovka": 0,

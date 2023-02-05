@@ -35,13 +35,13 @@ with open('test.json', 'r') as f:
     templates = json.load(f)
     print("придумайте и введите ваш уникальный id")
     user = int(input())
-    newelement = None
     for elements in templates:
         print(elements)
     if (elements.get('id') != user):
         print(elements.get('id'))
         elements['id'] = user
-        newelement = elements
-    templates.append(newelement)
+    templates.append(elements)
+    print(templates)
+            
     with open('test.json', 'w') as d1:
         json.dump(templates, d1, indent = 4)

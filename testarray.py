@@ -1,5 +1,6 @@
-
-n = int(input())
-a = map(int, input().split(maxsplit = n))
-print(n)
-print(list(a))
+story_count = {'сто': 100,
+               'девяносто': 90,
+               'двенадцать': 12,
+               'пять': 5}
+# Ключ "двенадцать" существует и метод get в данном случае вернёт 12
+print(story_count.get('двенадцать'))
