@@ -1,0 +1,33 @@
+{
+  "name": "backend-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-fileupload": "^1.2.1",
+    "express-handlebars": "^6.0.7",
+    "fs": "^0.0.1-security",
+    "mongoose": "^5.13.15",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/utimur/backend-for-kids-course.git"
+  },
+  "bugs": {
+    "url": "https://github.com/utimur/backend-for-kids-course/issues"
+  },
+  "homepage": "https://github.com/utimur/backend-for-kids-course#readme"
+}
