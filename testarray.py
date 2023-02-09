@@ -1,18 +1,20 @@
 import json
 import keyboard
+import requests
+
+BASE_URL = "http://localhost:5000/posts"
+response = requests.get(BASE_URL)
+response = response.json()
 
 a = True
 free_space = int()
 
-with open('test.json', 'r') as f:
-    arr = json.load(f)
-
 print("Введите уникальный идентификатор и запомните его. При последующим входе введете его:")
 user = int(input())
 
-
 user_found = False
-for elements in arr:
+for elements in response:
+    
     if elements.get('owner_id') == user:
         user_found = True
         break
@@ -23,12 +25,13 @@ if not user_found:
     new_element["owner_password"] = int(input("Введите пин-код:"))
     new_element["owner_price_parking"] = int(input("Введите цену парковки:"))
     new_element["owner_free_forinvalid"] = input("Бесплатно для льготников (yes/no):").lower() == "yes"
-    new_element["owner_number_parking_spaces"] = input("Введите количество свободных мест:")
+    new_element["owner_number_parking_spaces"] = int(input("Введите количество свободных мест:"))
     new_element["User_number_of_free_place_parking"] = new_element["owner_number_parking_spaces"]
     new_element["User_number_of_occupied_parking_spaces"] = 0
-    arr.append(new_element)
+    response = requests.post(BASE_URL, json = new_element)
+
 else:
-    for elements in arr:
+    for elements in response:
         if elements.get('owner_id') == user:
             print('Добро пожаловать!')
             print("Введите ваш пин-код, если уже зарегистрированы!")
@@ -45,6 +48,5 @@ else:
                         print("Обновлено количество бесплатных парковочных мест!")
                     if keyboard.is_pressed('n'):
                         a = False
+    
 
-with open('test.json', 'w') as f:
-    json.dump(arr, f, indent=4)

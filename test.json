@@ -28,5 +28,15 @@
         "owner_number_parking_spaces": 124,
         "User_number_of_free_place_parking": 124,
         "User_number_of_occupied_parking_spaces": 0
+    },
+    {
+        "owner_id": 2,
+        "owner_name_parking": "amets",
+        "owner_password": 152005,
+        "owner_price_parking": 123500,
+        "owner_free_forinvalid": true,
+        "owner_number_parking_spaces": "230",
+        "User_number_of_free_place_parking": "230",
+        "User_number_of_occupied_parking_spaces": 0
     }
 ]
