@@ -47,6 +47,23 @@ router.put('/posts',  async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 })
+router.put('/posts/:id', async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+        const updateData = req.body;
+
+        const parkingData = JSON.parse(fs.readFileSync('database.json'));
+        const parkingIndex = parkingData.findIndex((p) => p.owner_id === id);
+        parkingData[parkingIndex].owner_number_parking_spaces = updateData.owner_number_parking_spaces;
+        parkingData[parkingIndex].User_number_of_free_place_parking = updateData.User_number_of_free_place_parking;
+        fs.writeFileSync('database.json', JSON.stringify(parkingData));
+
+        res.json(parkingData[parkingIndex]);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
 router.delete('/posts/:id', async (req, res) => {
     try {
         const id = req.params.id;

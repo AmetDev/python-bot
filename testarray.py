@@ -56,4 +56,3 @@ else:
                    
                     if keyboard.is_pressed('n'):
                         running = False
-print("ey")
