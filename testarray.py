@@ -23,6 +23,7 @@ if not user_found:
     new_element = {"owner_id": user_id}
     new_element["owner_name_parking"] = input("Enter the name of the parking lot:")
     new_element["owner_password"] = int(input("Enter the PIN code:"))
+    new_element["index_city"] = int(input("Введите почтовый индекс вашего города"))
     new_element["owner_price_parking"] = int(input("Enter the price of parking:"))
     new_element["owner_free_forinvalid"] = input("Free for the handicapped (yes/no):").lower() == "yes"
     new_element["owner_number_parking_spaces"] = int(input("Enter the number of free spaces:"))

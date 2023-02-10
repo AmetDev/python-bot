@@ -24,6 +24,20 @@ router.get('/posts', async (req, res) => {
         res.status(500).json({ error: e.message });
     }
   });
+  router.get('/posts', async(req, res) => {
+    try {
+        const indexCity = req.query.index_city;
+        const parkingData = JSON.parse(fs.readFileSync('database.json'));
+        const filteredData = parkingData.filter(obj => obj.index_city === indexCity);
+        res.json(filteredData);
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+
+
+
 router.get('/posts/:id', async (req, res) => {
     try {
         const id = Number(req.params.id);
