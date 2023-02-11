@@ -2,7 +2,7 @@ import json
 import keyboard
 import requests
 
-BASE_URL = "http://localhost:5000/posts"
+BASE_URL = "http://45.130.43.65:9090/posts"
 response = requests.get(BASE_URL)
 response_json = response.json()
 
