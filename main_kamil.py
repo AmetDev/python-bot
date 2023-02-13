@@ -4,6 +4,7 @@ import json
 import aiohttp
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.message import ContentType
+
 BASE_URL = "http://45.130.43.65:9090/posts"
 
 async def get_free_spaces():
@@ -18,12 +19,15 @@ async def get_free_spaces():
                     elements['owner_name_parking'], 
                     elements['owner_free_forinvalid'], 
                     elements["owner_price_parking"]])
-    if choose_true == elements['User_number_of_free_place_parking']:
-            print("hello")
-            elements['User_number_of_free_place_parking'] -= 1
-            async with aiohttp.ClientSession() as session:
-                await session.put(f"{BASE_URL}/{elements['id']}", data=json.dumps(elements))
     return new_array
+async def decrement_and_update_element(elements, choose_true):
+    for element in elements:
+        if choose_true == element[0]:
+            print("hello")
+            element[0] -= 1
+            async with aiohttp.ClientSession() as session:
+                await session.put(f"{BASE_URL}/{element['id']}", data=json.dumps(element))
+
 
 
 
@@ -122,12 +126,16 @@ async def cmd_start(message: types.Message):
 async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery):
     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
 
+
+
 #конечная обработка платежа(можно задать действия по совершению платежа!!)
-@dp.message_handler(content_types=ContentType.SUCCESSFUL_PAYMENT)
 async def successful_payment(message: types.Message):
     print("SUCCESSFUL PAYMENT:")
     global choose_true
     choose_true = choose_booking
+    elements = await get_free_spaces()
+    await decrement_and_update_element(elements, choose_true)
+    print(elements)
     
     payment_info = message.successful_payment.to_python()
     for k, v in payment_info.items():
