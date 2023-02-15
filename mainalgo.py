@@ -44,7 +44,6 @@ else:
                     if keyboard.is_pressed('space'):
                         print("Has the number of free spaces changed? Indicate:")
                         free_space = int(input())
-                        element["owner_number_parking_spaces"] = free_space
                         element["User_number_of_free_place_parking"] = free_space
     
                         update_url = BASE_URL + "/" + str(element["owner_id"])

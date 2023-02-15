@@ -18,16 +18,22 @@ async def get_free_spaces():
                     elements['User_number_of_free_place_parking'],
                     elements['owner_name_parking'], 
                     elements['owner_free_forinvalid'], 
-                    elements["owner_price_parking"]])
+                    elements["owner_price_parking"],
+                    elements['owner_id'],
+                    elements["User_number_of_occupied_parking_spaces"]
+                 ])
     return new_array
-async def decrement_and_update_element(elements, choose_true):
-    for element in elements:
-        if choose_true == element[0]:
-            print("hello")
-            element[0] -= 1
+async def decrement_and_update_element(free_spaces, choose_booking):
+    for element in free_spaces:
+        print("hello")
+        if choose_booking == element[1]:
+            element[0] -= 1 
+            element[5] += 1
+            print('element')
             async with aiohttp.ClientSession() as session:
-                await session.put(f"{BASE_URL}/{element['id']}", data=json.dumps(element))
-
+                update_url = BASE_URL + "/" + str(element[4])
+                data = {'User_number_of_free_place_parking': element[0]}
+                await session.put(update_url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
 
 
 
@@ -48,7 +54,7 @@ choose_booking = "0"
 async def cmd_start(message: types.Message):
 
     ickb = [
-        [types.KeyboardButton(text="Узнать кол-во свободных мест")],
+        [types.KeyboardButton(text="Узнать количество свободных мест")],
         [types.KeyboardButton(text="Узнать есть ли льготные места")],
         [types.KeyboardButton(text="Забронировать место")]
     ]
@@ -58,10 +64,10 @@ async def cmd_start(message: types.Message):
 
 
 #свободные места
-@dp.message_handler(text=["Узнать кол-во свободных мест"])
+@dp.message_handler(text=["Узнать количество свободных мест"])
 async def cmd_free(message: types.Message):
     free_spaces = await get_free_spaces()
-    print(free_spaces)
+   
     for element in free_spaces:
         if(element[2] == True):
             element[2] = 'Доступны'
@@ -86,19 +92,24 @@ async def cmd_free1(message: types.Message):
 async def cmd_start(message: types.Message):
     free_spaces = await get_free_spaces()
     freespace = []
+
+    #await decrement_and_update_element(newarr, choose_booking)
     for element in free_spaces:
         ikb = [
         freespace.append([types.KeyboardButton(text=f"{str(element[1])}")])
     ]
+    #l1 = [[key, value] for key, value in free_spaces.items()]
     keyboard = types.ReplyKeyboardMarkup(keyboard=freespace)
     await message.answer("выбери место)", reply_markup=keyboard)
     for element in free_spaces:
         name = element[1]
+       
         @dp.message_handler(text=f"{str(element[1])}")
         async def button_booking(message: types.Message):
             global choose_booking
             x =  str(message['text'])
             choose_booking = x
+            print(choose_booking)
             await bot.send_invoice(
             message.chat.id,
             title="Бронь места",
@@ -114,10 +125,6 @@ async def cmd_start(message: types.Message):
             start_parameter='time-machine-example',
             payload='some-invoice-payload-for-our-internal-use'
         )
-            print('TET', choose_booking) 
-        
-    await message.answer("вернуться назад - /start", )
-
 
 
 
@@ -127,23 +134,18 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True)
 
 
-
 #конечная обработка платежа(можно задать действия по совершению платежа!!)
+@dp.message_handler(content_types=ContentType.SUCCESSFUL_PAYMENT)
 async def successful_payment(message: types.Message):
     print("SUCCESSFUL PAYMENT:")
-    global choose_true
-    choose_true = choose_booking
-    elements = await get_free_spaces()
-    await decrement_and_update_element(elements, choose_true)
-    print(elements)
-    
+    free_spaces = await get_free_spaces()
+    await decrement_and_update_element(free_spaces, choose_booking)
     payment_info = message.successful_payment.to_python()
     for k, v in payment_info.items():
         print(f"{k} = {v}")
  
     await bot.send_message(message.chat.id,
                            f"Платёж на сумму {message.successful_payment.total_amount // 100} {message.successful_payment.currency} по заказу места на "+ choose_booking +" прошел успешно!!!")
-
 
 # Запуск процесса поллинга новых апдейтов
 if __name__ == "__main__":
