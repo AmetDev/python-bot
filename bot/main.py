@@ -5,7 +5,7 @@ import aiohttp
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types.message import ContentType
 
-BASE_URL = "http://45.130.43.65:9090/posts"
+BASE_URL = "https://back-api-depoy-vercel-tfsy.vercel.app/posts"
 
 async def get_free_spaces():
     new_array = []
